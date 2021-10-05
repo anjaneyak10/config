@@ -28,9 +28,9 @@ spring:
           environment:
             spring:
               rabbitmq:
-                host: prod.rmq.eai.viacomcbs.com
-                port: 5671
-                virtual-host: d2c-content-wfevents
+                host: localhost
+                port: 5672
+                
                 ssl:
                   enabled: true
 
@@ -55,7 +55,8 @@ application:
     sender: ganapati.hegde@viacomcontractor.com
     subject: 'SOLR Alert, Site : Wf Events Process - DEV - '
   solr:
-    host: http://wfevents-solr-stage-e6eefd9229b7c1c5.elb.us-east-1.amazonaws.com/solr
+    host: http://localhost:8983/solr
+    collection: wf
   contentRefresh:
     delay: 0 0/3 * * * ?
     schedulerOn: false
