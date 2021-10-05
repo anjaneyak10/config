@@ -1,0 +1,108 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+spring:
+  cloud:
+    stream:
+      default:
+        consumer:
+          concurrency: 2
+      rabbit:
+        bindings:
+          assetChannel:
+            consumer:
+              maxConcurrency: 5
+              prefetch: 2
+              bindingRoutingKey: vms.shared.material.metadata.changed.notify
+          contentChannel:
+            consumer:
+              maxConcurrency: 5
+              prefetch: 2
+              bindingRoutingKey: vms.shared.content.metadata.changed.notify
+          clipChannel:
+            consumer:
+              maxConcurrency: 5
+              prefetch: 2
+              bindingRoutingKey: vms.shared.segment.metadata.changed.notify
+      bindings:
+        assetChannel:
+          binder: assetChannelBinder
+          group: vms.shared.solr.publish.metadata.changed
+          destination: vms.shared.material.metadata.changed.notify
+        contentChannel:
+          binder: contentChannelBinder
+          group: vms.shared.solr.publish.metadata.changed
+          destination: vms.shared.content.metadata.changed.notify
+        clipChannel:
+          binder: clipChannelBinder
+          group: vms.shared.solr.publish.metadata.changed
+          destination: vms.shared.segment.metadata.changed.notify
+      binders:
+        assetChannelBinder:
+          environment:
+            spring:
+              rabbitmq:
+                host: qa.rmq.eai.viacomcbs.com
+                port: 5671
+                virtual-host: vms.us_east.saturn
+                ssl:
+                  enabled: true
+        contentChannelBinder:
+          environment:
+            spring:
+              rabbitmq:
+                host: qa.rmq.eai.viacomcbs.com
+                port: 5671
+                virtual-host: vms.us_east.saturn
+                ssl:
+                  enabled: true
+        clipChannelBinder:
+          environment:
+            spring:
+              rabbitmq:
+                host: qa.rmq.eai.viacomcbs.com
+                port: 5671
+                virtual-host: vms.us_east.saturn
+                ssl:
+                  enabled: true
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+#property name changes to be done
+application:
+  rest:
+    host: http://als-stg-1.mtvn.ad.viacom.com
+    asset: /alias/UAT/api/Solr/SolrMaterialIndex?MaterialId=
+    clip: /alias/uat/api/Solr/SolrClipIndex?clipId=
+    content: /alias/uat/api/Solr/SolrContentIndex?ContentId=
+  solr:
+    host: http://vms-search.mtvnservices-q.mtvi.com/solr
+    collection: vms
+  mail:
+    solrRecipients: ganapati.hegde@viacomcontractor.com;Surya.Sai@viacomcontractor.com
+    restRecipients: ganapati.hegde@viacomcontractor.com;Surya.Sai@viacomcontractor.com
+    sender: ganapati.hegde@viacomcontractor.com
+    subject: 'SOLR Alert, Site : Alias VMS Process - DEV - ' 
+  contentRefresh:
+    delay: 0 0 0/5 * * ?
+    schedulerOn: false    
+    batchSize: 500
+    
