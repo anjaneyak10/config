@@ -36,7 +36,7 @@ spring:
                     bus:
                     enabled: true
                     refresh:
-                    enabled: true
+                      enabled: true
                         
                 #ssl:
                 #  enabled: true
