@@ -31,7 +31,13 @@ spring:
                 host: localhost
                 port: 5672
                 username: guest
-                password: guest                
+                password: guest 
+                cloud:
+                    bus:
+                    enabled: true
+                    refresh:
+                    enabled: true
+                        
                 #ssl:
                 #  enabled: true
 
@@ -57,7 +63,7 @@ application:
     subject: 'SOLR Alert, Site : Wf Events Process - DEV - '
   solr:
     host: http://localhost:8983/solr
-    collection: wf2
+    collection: wf3
   contentRefresh:
     delay: 0 0/3 * * * ?
     schedulerOn: false
