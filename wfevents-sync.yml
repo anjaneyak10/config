@@ -63,7 +63,7 @@ application:
     subject: 'SOLR Alert, Site : Wf Events Process - DEV - '
   solr:
     host: http://localhost:8983/solr
-    collection: wf4
+    collection: wf2
   contentRefresh:
     delay: 0 0/3 * * * ?
     schedulerOn: false
