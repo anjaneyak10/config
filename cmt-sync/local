@@ -1,0 +1,41 @@
+# ===================================================================
+# Spring Boot configuration for the "local" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+spring:
+   jmx: false
+#property name changes to be done
+application:
+  mail:
+    solrRecipients: anjaneya.ketar@viacomcontractor.com
+    restRecipients: anjaneya.kekar@viacomcontractor.com
+    sender: anjaneya.ketkar@vicomcontractor.com
+    subject: 'SOLR Alert, Site : CMT Process - LOCAL - '
+  solr:
+    host: http://localhost:8983/solr
+    #username: searchadmin
+    #password: newuser313
+  contentRefresh:
+    delay: 0 0/1 * * * ?
+    schedulerOn: true
+    regularSchedularOn: false
+    oldDateSchedular: false
+    normalDateTime: 2021-04-23T14:50:00.033Z
+    startDateTime: 2021-04-23T14:50:00.033Z
+    endDateTime: 2021-04-23T14:55:00.033Z
+management:
+   security:
+      enabled: false
+endpoints:
+   actuator:
+      enabled: true
+   health:
+      defaults:
+         enabled: true
